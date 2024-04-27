@@ -11,7 +11,7 @@ const UserRightScreen = () => {
   const [stopValue, setStopValue] = useState(null);
   const [searchId, setSearchId] = useState('');
 
-  const stopItem = [
+    const stopItem = [
     { label: 'Select', value: 'item0' },
     { label: 'Pooja', value: 'item1' },
     { label: 'Vaibhav', value: 'item2' },
