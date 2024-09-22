@@ -13,6 +13,9 @@ class Employee{
     createEmployee(employee){
         return axios.post("http://localhost:8080/demo/postData", employee);
     }
+    deleteEmployee(id){
+        return axios.delete("http://localhost:8080/demo/deleteData", id);
+    }
 }
 
 

@@ -19,7 +19,7 @@ export default function App() {
       {/* <Demo/> */}
       {/* <MFDemo/> */}
       
-     <UserRightScreen/>
+     {/* <UserRightScreen/> */}
      <TrackingScreen/>
      {/* <MF/> */}
 

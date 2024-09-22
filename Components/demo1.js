@@ -70,11 +70,11 @@ const Demo = () => {
 
   const handleSubmit = () => {
     if (!branchName || !userId || !userPassword || !userName || !userEmail || !userMobile || !selectedValue || !stopValue) {
-        Alert.alert('Error', 'Please fill in all fields');
+        alert('Error! Please fill in all fields', '');
     } else {
         console.warn('Form Submitted!');
         handleAddRow({
-            id: rows.length + 1,
+            // id: rows.length + 1,
             userId: userId,
             srno: rows.length + 1,
             branch: branchName,
@@ -103,11 +103,27 @@ const Demo = () => {
     }
 };
 
+const handleUpdate =()=>{
+  
+};
+
+const deletedata =()=>{
+  Employee.deleteEmployee(srno)
+  .then(res => {
+    // Handle successful deletion if needed
+    console.log('Employee deleted successfully');
+  })
+  .catch(error => {
+    // Handle error if deletion fails
+    console.error('Error deleting employee:', error);
+  });
+};
+
 
   const handleAddRow = () => {
     // Create a new row object with initial values
     const newRow = {
-      id: rows.length + 1,
+      // id: rows.length + 1,
       userId: userId, // Set the userId directly
       srno: rows.length + 1,
       branch: branchName, // Set the branchName directly
@@ -241,14 +257,14 @@ const Demo = () => {
         <View style={styles.tableContainer}>
           {/* Heading Row */}
           <View style={[styles.tableRow, styles.headingRow]}>
-            <Text style={styles.headingText}>User Id</Text>
             <Text style={styles.headingText}>Sr No</Text>
+            <Text style={styles.headingText}>User Id</Text>
             <Text style={styles.headingText}>Branch Name</Text>
+            <Text style={styles.headingText}>User Name</Text>
             <Text style={styles.headingText}>Email</Text>
             <Text style={styles.headingText}>Mobile No</Text>
-            <Text style={styles.headingText}>Stop Transaction</Text>
-            <Text style={styles.headingText}>User Name</Text>
             <Text style={styles.headingText}>User Type</Text>
+            <Text style={styles.headingText}>Stop Transaction</Text>
           </View>
 
           {/* Information Row */}
@@ -269,6 +285,20 @@ const Demo = () => {
                     setRows(updatedRows);
                   }}
                 />
+                 <TextInput
+                  style={styles.cell}
+                  placeholder="User Id"
+                  value={row.userId}
+                  onChangeText={(text) => {
+                    const updatedRows = rows.map(r => {
+                      if (r.id === row.id) {
+                        return { ...r, userId: text };
+                      }
+                      return r;
+                    });
+                    setRows(updatedRows);
+                  }}
+                />
                 <TextInput
                   style={styles.cell}
                   placeholder="Branch Name"
@@ -283,20 +313,7 @@ const Demo = () => {
                     setRows(updatedRows);
                   }}
                 />
-                <TextInput
-                  style={styles.cell}
-                  placeholder="User Id"
-                  value={row.userId}
-                  onChangeText={(text) => {
-                    const updatedRows = rows.map(r => {
-                      if (r.id === row.id) {
-                        return { ...r, userId: text };
-                      }
-                      return r;
-                    });
-                    setRows(updatedRows);
-                  }}
-                />
+               
                 <TextInput
                   style={styles.cell}
                   placeholder="User Name"
@@ -371,6 +388,17 @@ const Demo = () => {
             )
           }
         </View>
+        <View style={styles.ud}>
+          <TouchableOpacity style={[ { borderColor: 'green' }]} onPress={handleUpdate}>
+            {/* <Image source={require("../assets/submit.jpg")} style={styles.image} /> */}
+            <Text style={styles.buttonTextS}>UPDATE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[{ borderColor: 'red' }]} onPress={deletedata}>
+            {/* <Image source={require("../assets/reset.jpg")} style={styles.image} /> */}
+            <Text style={styles.buttonTextR}>DELETE</Text>
+          </TouchableOpacity>
+        </View>
+
       </ScrollView>
     </ScrollView>
   );
@@ -493,6 +521,12 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     width: 120,
   },
+  ud: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding:60,
+  },
+  
 });
 
 export default Demo;
